@@ -1,0 +1,25 @@
+name: This is a test
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: "Test"
+        id: test
+        run: |
+          if [ -z "${{  github.event.pull_request.head.ref }}" ]
+          then
+            echo 1
+          else
+            echo 2
+          fi
